@@ -97,7 +97,6 @@ def sonuclar():
 
     if request.method == "POST":
         model = model = pickle.load(open('static/svm_tuned_model.sav', 'rb'))
-#  if request.method == "POST":
         name = request.form.get('name')
         feature_1 = request.form['thickness']
         feature_2 = request.form['size']
@@ -126,7 +125,7 @@ def sonuclar():
         if y_pred == 0:
             return render_template('sonuclar.html', sonuc_iyi="I Come With Good News", sonuc_kotu="", cancers=cancers)
         if y_pred == 1:
-            return render_template('sonuclar.html', sonuc_kotu="Üzgün bir haber vereceğim, maalesef tümör kötü huylu", sonuc_iyi="", cancers=cancers)
+            return render_template('sonuclar.html', sonuc_kotu="I'll give some sad news, unfortunately the tumor is malignant", sonuc_iyi="", cancers=cancers)
     else:
         cancers = Cancer.query.order_by(desc(Cancer.id)).limit(5).all()
         return render_template('sonuclar.html', cancers=cancers)
